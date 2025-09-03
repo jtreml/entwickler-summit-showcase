@@ -1,51 +1,78 @@
-# Entwickler Summit Show Case 2025
+Perfect 👍 Then here’s the full updated README.md with both Maven and Maven Wrapper instructions included:
 
-This project can be used as a starting point to create your own Vaadin application with Spring Boot.
-It contains all the necessary configuration and some placeholder files to get you started.
+# Developer Summit Showcase – Vaadin Demo
 
-## Running the application
+This is a small demo project to get started with **[Vaadin](https://vaadin.com/)**.  
+Vaadin is a Java framework for building **modern web apps** entirely in Java – no need to write HTML, CSS, or JavaScript.
 
-Open the project in an IDE. You can download the [IntelliJ community edition](https://www.jetbrains.com/idea/download) if you do not have a suitable IDE already.
-Once opened in the IDE, locate the `Application` class and run the main method using "Debug".
+## 🚀 Running the project
 
-For more information on installing in various IDEs, see [how to import Vaadin projects to different IDEs](https://vaadin.com/docs/latest/getting-started/import).
+Requirements:
+- Java 21+
 
-If you install the Vaadin plugin for IntelliJ, you should instead launch the `Application` class using "Debug using HotswapAgent" to see updates in the Java code immediately reflected in the browser.
+### Start the application
 
-## Deploying to Production
-
-The project is a standard Maven project. To create a production build, call 
-
+Using **Maven directly**:
+```bash
+mvn spring-boot:run
 ```
-./mvnw clean package -Pproduction
+Using the Maven Wrapper (preferred, included in the project):
+
+#### Linux / macOS
+```bash
+./mvnw spring-boot:run
+```
+#### Windows
+```bash
+mvnw.cmd spring-boot:run
 ```
 
-If you have Maven globally installed, you can replace `./mvnw` with `mvn`.
+Once started, open:
+👉 http://localhost:8080
 
-This will build a JAR file with all the dependencies and front-end resources,ready to be run. The file can be found in the `target` folder after the build completes.
-You then launch the application using 
+## 📖 What does this demo show?
+
+The app includes:
+	•	an in-memory H2 database with sample persons
+	•	a Spring Data repository & service layer
+	•	a Vaadin view that demonstrates how to build a UI with just Java
+
+HelloWorldView.java
+
+The main view (@Route("")) shows:
+	1.	A Grid displaying people (first name, last name, email)
+	2.	A search field for filtering
+	3.	Data binding to the repository in just a few lines of code
+
+```java
+Grid<SamplePerson> grid = new Grid<>(SamplePerson.class);
+grid.setColumns("firstName", "lastName", "email");
+
+TextField filterField = new TextField("Search by name...");
+filterField.addValueChangeListener(event -> {
+    String searchText = event.getValue();
+    dataView.setFilter(person ->
+        person.getFirstName().toLowerCase().contains(searchText) ||
+        person.getLastName().toLowerCase().contains(searchText)
+    );
+});
 ```
-java -jar target/entwickler-summit-showcase-1.0-SNAPSHOT.jar
-```
 
-## Project structure
+## 🧩 Project structure
 
-- `MainLayout.java` in `src/main/java` contains the navigation setup (i.e., the
-  side/top bar and the main menu). This setup uses
-  [App Layout](https://vaadin.com/docs/components/app-layout).
-- `views` package in `src/main/java` contains the server-side Java views of your application.
-- `views` folder in `src/main/frontend` contains the client-side JavaScript views of your application.
-- `themes` folder in `src/main/frontend` contains the custom CSS styles.
+src/main/java/com/vaadin/demo/
+ ├── data/
+ │   ├── SamplePerson.java            # Entity
+ │   ├── SamplePersonRepository.java  # Spring Data Repository
+ └── views/helloworld/
+     └── HelloWorldView.java          # UI (Vaadin View)
 
-## Useful links
+🔍 Learn more
+	•	Vaadin Documentation
+	•	Vaadin Start Tool – create your own project in seconds
+	•	Vaadin Components – full component catalog
 
-- Read the documentation at [vaadin.com/docs](https://vaadin.com/docs).
-- Follow the tutorial at [vaadin.com/docs/latest/tutorial/overview](https://vaadin.com/docs/latest/tutorial/overview).
-- Create new projects at [start.vaadin.com](https://start.vaadin.com/).
-- Search UI components and their usage examples at [vaadin.com/docs/latest/components](https://vaadin.com/docs/latest/components).
-- View use case applications that demonstrate Vaadin capabilities at [vaadin.com/examples-and-demos](https://vaadin.com/examples-and-demos).
-- Build any UI without custom CSS by discovering Vaadin's set of [CSS utility classes](https://vaadin.com/docs/styling/lumo/utility-classes). 
-- Find a collection of solutions to common use cases at [cookbook.vaadin.com](https://cookbook.vaadin.com/).
-- Find add-ons at [vaadin.com/directory](https://vaadin.com/directory).
-- Ask questions on [Stack Overflow](https://stackoverflow.com/questions/tagged/vaadin) or join our [Forum](https://vaadin.com/forum).
-- Report issues, create pull requests in [GitHub](https://github.com/vaadin).
+⸻
+👉 With Vaadin you can build full-stack web apps in pure Java – no frontend hassle required.
+---
+Do you also want me to add a **note that the wrapper is recommended for presentations/workshops**, so participants don’t need to install Maven globally?
