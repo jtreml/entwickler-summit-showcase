@@ -2,12 +2,10 @@ package com.vaadin.demo.views.helloworld;
 
 import com.vaadin.demo.data.SamplePerson;
 import com.vaadin.demo.data.SamplePersonRepository;
-import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.dataview.GridListDataView;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Menu;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -46,8 +44,8 @@ public class HelloWorldView extends VerticalLayout {
             } else {
                 String lowerCaseFilter = searchText.toLowerCase().trim();
                 dataView.addFilter(person ->
-                        person.getFirstName().toLowerCase().contains(lowerCaseFilter) ||
-                                person.getLastName().toLowerCase().contains(lowerCaseFilter)
+                        person.getFirstName().toLowerCase().startsWith(lowerCaseFilter) ||
+                                person.getLastName().toLowerCase().startsWith(lowerCaseFilter)
                 );
             }
         });
