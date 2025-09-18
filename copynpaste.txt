@@ -1,3 +1,7 @@
+add three more fields for street, city and state, make state a dropdown and fill it with the German Bundesländer
+
+add a horizontal layout in the end with two buttons, save and cancel, make save a primary and cancel a tertiary button
+
 Tell me something about Vaadin
 
 Can you show me a Hello World example in Vaadin?
